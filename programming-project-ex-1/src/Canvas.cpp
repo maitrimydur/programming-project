@@ -1,0 +1,124 @@
+#include "Canvas.h"
+#include <GL/freeglut.h>
+#include <algorithm>
+
+Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x,y,w,h) {
+
+}
+
+Canvas::~Canvas() {
+    for (int i = 0; i < (int)shapes.size(); i++)
+        delete shapes[i];
+}
+
+void Canvas::startScribble(float x, float y, float r, float g, float b, int s) {
+    currentScribble = new Scribble();
+    shapes.push_back(currentScribble);
+    currentScribble->addPoint(x,y,r,g,b,s);
+}
+
+void Canvas::addToScribble(float x, float y, float r, float g, float b, int s) {
+    if (currentScribble) {
+        currentScribble->addPoint(x,y,r,g,b,s);
+    }
+}
+
+void Canvas::finishScribble() {
+    currentScribble = NULL;
+}
+
+void Canvas::addRectangle(float x, float y, float r, float g, float b) {
+    shapes.push_back(new Rectangle(x,y,r,g,b));
+}
+
+void Canvas::addCircle(float x, float y, float r, float g, float b) {
+    shapes.push_back(new Circle(x,y,r,g,b));
+}
+
+void Canvas::addTriangle(float x, float y, float r, float g, float b) {
+    shapes.push_back(new Triangle(x,y,r,g,b));
+}
+
+void Canvas::addPolygon(float x, float y, float r, float g, float b) {
+    shapes.push_back(new Polygon(x,y,r,g,b));
+}
+
+void Canvas::selectAt(float mx, float my) {
+    selected = NULL;
+    for (int i = (int)shapes.size()-1; i >= 0; i--) {
+        if (shapes[i]->contains(mx,my)) {
+            selected = shapes[i];
+            break;
+        }
+    }
+}
+
+void Canvas::moveSelected(float dx, float dy) {
+    if (selected) {
+        selected->moveBy(dx,dy);
+    }
+}
+
+void Canvas::resizeSelected(float factor) {
+    if (selected) {
+        selected->resize(factor);
+    }
+}
+
+void Canvas::recolorSelected(float r, float g, float b) {
+    if (selected) {
+        selected->setColor(r, g, b);
+    }
+}
+
+void Canvas::bringToFront() {
+    if (!selected) {
+        return;
+    }
+
+    for (int i = 0; i < (int)shapes.size(); i++) {
+        if (shapes[i] == selected) {
+            Shape* tmp = shapes[i];
+            shapes.erase(shapes.begin() + i);
+            shapes.push_back(tmp);
+            break;
+        }
+    }
+}
+
+void Canvas::sendToBack() {
+    if (!selected) {
+        return;
+    }
+
+    for (int i = 0; i < (int)shapes.size(); i++) {
+        if (shapes[i] == selected) {
+            Shape* tmp = shapes[i];
+            shapes.erase(shapes.begin() + i);
+            shapes.insert(shapes.begin(), tmp);
+            break;
+        }
+    }
+}
+
+void Canvas::clear() {
+    for (int i = 0; i < (int)shapes.size(); i++) {
+        delete shapes[i];
+    }
+    shapes.clear();
+    selected = NULL;
+}
+
+void Canvas::undo() {
+    if (shapes.size() > 0) {
+        delete shapes[shapes.size()-1];
+        shapes.pop_back();
+        selected = NULL;
+    }
+}
+
+void Canvas::render() {
+    for (int i = 0; i < (int)shapes.size(); i++) {
+        shapes[i]->draw();
+    }
+}
