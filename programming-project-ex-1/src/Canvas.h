@@ -15,13 +15,13 @@ class Canvas : public bobcat::Canvas_ {
     std::vector<Shape*> shapes;
     Scribble* currentScribble;
     Shape* selected;
-
+    
 public:
     Canvas(int x, int y, int w, int h);
     ~Canvas();
 
-    void startScribble(float x, float y, float r, float g, float b, int s);
-    void addToScribble(float x, float y, float r, float g, float b, int s);
+    void startScribble(float x, float y, float r, float g, float b, int size);
+    void addToScribble(float x, float y, float r, float g, float b, int size);
     void finishScribble();
 
     void addRectangle(float x, float y, float r, float g, float b);
@@ -35,6 +35,8 @@ public:
     void recolorSelected(float r, float g, float b);
     void bringToFront();
     void sendToBack();
+    void resizeSelectedUp();
+    void resizeSelectedDown();
 
     void clear();
     void undo();
