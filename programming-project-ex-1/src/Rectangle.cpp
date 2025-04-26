@@ -1,11 +1,11 @@
 #include "Rectangle.h"
 #include <GL/freeglut.h>
 
-Rectangle::Rectangle() : x(0.0), y(0.0), width(0.4), height(0.4), r(0.0), g(0.0), b(0.0) {
+Rectangle::Rectangle() : x(0.0), y(0.0), width(0.2), height(0.2), r(0.0), g(0.0), b(0.0) {
     //
 }
 
-Rectangle::Rectangle(float xx, float yy, float rr, float gg, float bb) : x(xx), y(yy), width(0.4), height(0.4), r(rr), g(gg), b(bb) {
+Rectangle::Rectangle(float xx, float yy, float rr, float gg, float bb) : x(xx), y(yy), width(0.2), height(0.2), r(rr), g(gg), b(bb) {
     //
 }
 
@@ -34,8 +34,15 @@ void Rectangle::moveBy(float dx, float dy) {
 }
 
 void Rectangle::resize(float factor) {
-    width  = width  * factor;
+    width  = width * factor;
     height = height * factor;
+
+    if (width < 0.05) {
+        width = 0.05;
+    }
+    if (height < 0.05) {
+        height = 0.05;
+    }
 }
 
 void Rectangle::setColor(float nr, float ng, float nb) {
