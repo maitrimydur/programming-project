@@ -6,13 +6,13 @@ void Scribble::addPoint(float x, float y, float r, float g, float b, int s) {
 
 void Scribble::draw() {
     for (int i = 0; i < (int)points.size(); i++) {
-        points[i]->draw();
+        points[i] -> draw();
     }
 }
 
 bool Scribble::contains(float mx, float my) {
     for (int i = 0; i < (int)points.size(); i++) {
-        if (points[i]->contains(mx, my)) {
+        if (points[i] -> contains(mx, my)) {
             return true;
         }
     }
@@ -21,19 +21,19 @@ bool Scribble::contains(float mx, float my) {
 
 void Scribble::moveBy(float dx, float dy) {
     for (int i = 0; i < (int)points.size(); i++) {
-        points[i]->moveBy(dx, dy);
+        points[i] -> moveBy(dx, dy);
     }
 }
 
 void Scribble::resize(float factor) {
     for (int i = 0; i < (int)points.size(); i++) {
-        points[i]->resize(factor);
+        points[i] -> resize(factor);
     }
 }
 
 void Scribble::setColor(float nr, float ng, float nb) {
     for (int i = 0; i < (int)points.size(); i++) {
-        points[i]->setColor(nr, ng, nb);
+        points[i] -> setColor(nr, ng, nb);
     }
 }
 
@@ -42,4 +42,8 @@ Scribble::~Scribble() {
         delete points[i];
     }
     points.clear();
+}
+
+bool Scribble::isScribble() const {
+    return true;
 }
