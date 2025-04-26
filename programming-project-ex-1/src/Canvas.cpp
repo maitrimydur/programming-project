@@ -3,23 +3,24 @@
 #include <algorithm>
 
 Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x,y,w,h) {
-
+    //
 }
 
 Canvas::~Canvas() {
-    for (int i = 0; i < (int)shapes.size(); i++)
+    for (int i = 0; i < (int)shapes.size(); i++) {
         delete shapes[i];
+    }
 }
 
-void Canvas::startScribble(float x, float y, float r, float g, float b, int s) {
+void Canvas::startScribble(float x, float y, float r, float g, float b, int size) {
     currentScribble = new Scribble();
     shapes.push_back(currentScribble);
-    currentScribble->addPoint(x,y,r,g,b,s);
+    currentScribble -> addPoint(x,y,r,g,b,size);
 }
 
-void Canvas::addToScribble(float x, float y, float r, float g, float b, int s) {
+void Canvas::addToScribble(float x, float y, float r, float g, float b, int size) {
     if (currentScribble) {
-        currentScribble->addPoint(x,y,r,g,b,s);
+        currentScribble -> addPoint(x,y,r,g,b,size);
     }
 }
 
@@ -44,30 +45,38 @@ void Canvas::addPolygon(float x, float y, float r, float g, float b) {
 }
 
 void Canvas::selectAt(float mx, float my) {
-    selected = NULL;
-    for (int i = (int)shapes.size()-1; i >= 0; i--) {
-        if (shapes[i]->contains(mx,my)) {
+    selected = nullptr;
+
+    for (int i = (int)shapes.size() - 1; i >= 0; --i) {
+        if (!shapes[i]->isScribble() && shapes[i]->contains(mx, my)) {
             selected = shapes[i];
-            break;
+            return;
+        }
+    }
+
+    for (int i = (int)shapes.size() - 1; i >= 0; --i) {
+        if (shapes[i]->isScribble() && shapes[i]->contains(mx, my)) {
+            selected = shapes[i];
+            return;
         }
     }
 }
 
 void Canvas::moveSelected(float dx, float dy) {
     if (selected) {
-        selected->moveBy(dx,dy);
+        selected -> moveBy(dx,dy);
     }
 }
 
 void Canvas::resizeSelected(float factor) {
     if (selected) {
-        selected->resize(factor);
+        selected -> resize(factor);
     }
 }
 
 void Canvas::recolorSelected(float r, float g, float b) {
     if (selected) {
-        selected->setColor(r, g, b);
+        selected -> setColor(r, g, b);
     }
 }
 
@@ -101,6 +110,18 @@ void Canvas::sendToBack() {
     }
 }
 
+void Canvas::resizeSelectedUp() {
+    if (selected) {
+        selected -> resize(1.1);
+    }
+}
+
+void Canvas::resizeSelectedDown() {
+    if (selected) {
+        selected -> resize(0.9);
+    }
+}
+
 void Canvas::clear() {
     for (int i = 0; i < (int)shapes.size(); i++) {
         delete shapes[i];
@@ -119,6 +140,6 @@ void Canvas::undo() {
 
 void Canvas::render() {
     for (int i = 0; i < (int)shapes.size(); i++) {
-        shapes[i]->draw();
+        shapes[i] -> draw();
     }
 }
