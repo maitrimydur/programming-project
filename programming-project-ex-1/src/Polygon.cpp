@@ -3,11 +3,11 @@
 #include <cmath>
 
 Polygon::Polygon() : x(0.0), y(0.0), sides(5), length(0.1), r(0.0), g(0.0), b(0.0) {
-
+    //
 }
 
 Polygon::Polygon(float xx, float yy, float rr, float gg, float bb) : x(xx), y(yy), sides(5), length(0.1), r(rr), g(gg), b(bb) {
-
+    //
 }
 
 void Polygon::draw() {
@@ -40,6 +40,9 @@ void Polygon::moveBy(float dx, float dy) {
 
 void Polygon::resize(float factor) {
     length = length * factor;
+    if (length < 0.05) {
+        length = 0.05;
+    }
 }
 
 void Polygon::setColor(float nr, float ng, float nb) {
