@@ -16,6 +16,8 @@ class Toolbar : public bobcat::Group {
     bobcat::Image* clearButton;
     bobcat::Image* bringFrontButton;
     bobcat::Image* sendBackButton;
+    bobcat::Image* plusButton;
+    bobcat::Image* minusButton;
     
     TOOL tool;
     ACTION action;
@@ -29,6 +31,7 @@ public:
     
     TOOL getTool() const;
     ACTION getAction() const;
+    void clearAction();
 };
 
 #endif
