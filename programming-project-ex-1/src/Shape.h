@@ -17,8 +17,9 @@ public:
 
     virtual void setColor(float r, float g, float b) = 0;
 
-    virtual ~Shape();
+    virtual bool isScribble() const;
 
+    virtual ~Shape();
 };
 
 #endif
