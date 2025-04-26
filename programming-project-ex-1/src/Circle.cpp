@@ -2,12 +2,12 @@
 #include <GL/freeglut.h>
 #include <cmath>
 
-Circle::Circle() : x(0.0), y(0.0), radius(0.2), r(0.0), g(0.0), b(0.0) {
-  //
+Circle::Circle() : x(0.0), y(0.0), radius(0.1), r(0.0), g(0.0), b(0.0) {
+    //
 }
 
-Circle::Circle(float xx, float yy, float rr, float gg, float bb) : x(xx), y(yy), radius(0.2), r(rr), g(gg), b(bb) {
-  //
+Circle::Circle(float xx, float yy, float rr, float gg, float bb) : x(xx), y(yy), radius(0.1), r(rr), g(gg), b(bb) {
+    //
 }
 
 void Circle::draw() {
@@ -41,6 +41,10 @@ void Circle::moveBy(float dx, float dy) {
 
 void Circle::resize(float factor) {
     radius = radius * factor;
+
+    if (radius < 0.05) {
+        radius = 0.05;
+    }
 }
 
 void Circle::setColor(float nr, float ng, float nb) {
