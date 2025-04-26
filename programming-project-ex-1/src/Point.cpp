@@ -3,11 +3,11 @@
 #include <cmath>
 
 Point::Point() : x(0.0), y(0.0), r(0.0), g(0.0), b(0.0), size(7) {
-
+    //
 }
 
 Point::Point(float x, float y, float rr, float gg, float bb, int s) : x(x), y(y), r(rr), g(gg), b(bb), size(s) {
-
+    //
 }
 
 void Point::draw() {
@@ -33,7 +33,16 @@ void Point::moveBy(float dx, float dy) {
 }
 
 void Point::resize(float factor) {
-    size = int(size * factor);
+    if (factor > 1) {
+        size = size + 1;
+    }
+    else if (factor < 1.0) {
+        size = size - 1;
+    }
+    
+    if (size < 1) {
+        size = 1;
+    }
 }
 
 void Point::setColor(float nr, float ng, float nb) {
