@@ -37,8 +37,15 @@ void Triangle::moveBy(float dx, float dy) {
 }
 
 void Triangle::resize(float factor) {
-    base   = base   * factor;
+    base   = base * factor;
     height = height * factor;
+
+    if (base < 0.05) {
+        base = 0.05;
+    }
+    if (height < 0.05) {
+        height = 0.05;
+    }
 }
 
 void Triangle::setColor(float nr, float ng, float nb) {
