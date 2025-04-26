@@ -63,6 +63,10 @@ void ColorSelector::onClick(bobcat::Widget* sender) {
 
     visualizeSelectedColor();
     redraw();
+
+    if (onChangeCb) {
+        onChangeCb(this);
+    }
 }
 
 Color ColorSelector::getColor() const {
