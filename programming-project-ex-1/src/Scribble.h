@@ -15,6 +15,8 @@ public:
     void moveBy(float dx, float dy) override;
     void resize(float factor) override;
     void setColor(float r, float g, float b) override;
+    bool isScribble() const override;
+
     ~Scribble();
 };
 
