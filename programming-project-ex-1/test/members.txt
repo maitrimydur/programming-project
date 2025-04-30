@@ -1,1 +1,17 @@
+Group Name
+-----------------
+Solo
+
+Members
+-------------
+[Maithreyi Mydur - maitrimydur]
+
+
+Designated Submitter
+-----------------------------
 Maithreyi Mydur
+
+
+Github Repo Link
+-----------------------
+https://github.com/maitrimydur/programming-project
