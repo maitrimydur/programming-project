@@ -15,22 +15,24 @@ void Polygon::draw() {
     glBegin(GL_POLYGON);
         float inc = 2 * M_PI / sides;
         float theta = 0.0;
+
         while (theta <= 2 * M_PI) {
-            glVertex2f(x + length * cos(theta),
-                       y + length * sin(theta));
+            glVertex2f(x + length * cos(theta), y + length * sin(theta));
             theta = theta + inc;
         }
+
     glEnd();
 }
 
 bool Polygon::contains(float mx, float my) {
     float dx = mx - x;
     float dy = my - y;
-    if (dx >= -length && dx <= length &&
-        dy >= -length && dy <= length)
+    if (dx >= -length && dx <= length && dy >= -length && dy <= length) {
         return true;
-    else
+    }
+    else {
         return false;
+    }
 }
 
 void Polygon::moveBy(float dx, float dy) {
