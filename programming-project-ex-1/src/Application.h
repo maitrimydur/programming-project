@@ -11,6 +11,7 @@ class Application : public bobcat::Application_ {
     Toolbar* toolbar;
     Canvas* canvas;
     ColorSelector* colorSelector;
+    
     float lastX;
     float lastY;
 
