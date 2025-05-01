@@ -15,6 +15,7 @@ class ColorSelector : public bobcat::Group {
     bobcat::Button* violetButton;
 
     COLOR color;
+    
     void deselectAllColors();
     void visualizeSelectedColor();
     void onClick(bobcat::Widget* sender);
