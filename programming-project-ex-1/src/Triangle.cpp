@@ -23,6 +23,7 @@ bool Triangle::contains(float mx, float my) {
     float maxx = x + base/2;
     float miny = y - height/2;
     float maxy = y + height/2;
+
     if (mx >= minx && mx <= maxx && my >= miny && my <= maxy) {
         return true;
     }
@@ -43,6 +44,7 @@ void Triangle::resize(float factor) {
     if (base < 0.05) {
         base = 0.05;
     }
+    
     if (height < 0.05) {
         height = 0.05;
     }
