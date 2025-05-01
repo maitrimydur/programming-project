@@ -40,6 +40,7 @@ void Rectangle::resize(float factor) {
     if (width < 0.05) {
         width = 0.05;
     }
+    
     if (height < 0.05) {
         height = 0.05;
     }
