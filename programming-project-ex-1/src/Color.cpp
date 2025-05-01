@@ -15,9 +15,11 @@ Color::Color(float red, float green, float blue) {
 float Color::getR() const { 
     return r; 
 }
+
 float Color::getG() const { 
     return g; 
 }
+
 float Color::getB() const {
     return b; 
 }
