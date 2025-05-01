@@ -23,8 +23,13 @@ bool Point::contains(float mx, float my) {
     float dy = my - y;
     float distSq = dx * dx + dy * dy;
     int half = size / 2;
-    if (distSq <= half * half) return true;
-    else return false;
+    
+    if (distSq <= half * half) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 void Point::moveBy(float dx, float dy) {
