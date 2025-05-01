@@ -17,7 +17,6 @@ public:
     Polygon(float x, float y, float r, float g, float b);
 
     void draw() override;
-
     bool contains(float mx, float my) override;
     void moveBy(float dx, float dy) override;
     void resize(float factor) override;
