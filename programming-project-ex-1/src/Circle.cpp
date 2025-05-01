@@ -15,17 +15,19 @@ void Circle::draw() {
     glBegin(GL_POLYGON);
         float inc = 2 * M_PI / 60;
         float theta = 0.0;
+
         while (theta <= 2 * M_PI) {
-            glVertex2f(x + radius * cos(theta),
-            y + radius * sin(theta));
+            glVertex2f(x + radius * cos(theta), y + radius * sin(theta));
             theta = theta + inc;
         }
+
     glEnd();
 }
 
 bool Circle::contains(float mx, float my) {
     float dx = mx - x;
     float dy = my - y;
+    
     if (dx * dx + dy * dy <= radius * radius) {
         return true;
     }
