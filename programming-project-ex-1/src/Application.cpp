@@ -71,23 +71,15 @@ void Application::onToolbarChange(bobcat::Widget* sender) {
 
     if (action == CLEAR) {
         canvas -> clear();
-        //
-        toolbar -> clearAction();
     }
     else if (action == UNDO) {
         canvas -> undo();
-        //
-        toolbar -> clearAction();
     }
     else if (action == BRING_TO_FRONT) {
         canvas -> bringToFront();
-        //
-        toolbar -> clearAction();
     }
     else if (action == SEND_TO_BACK) {
         canvas -> sendToBack();
-        //
-        toolbar -> clearAction();
     }
     else if (action == RESIZE_UP) {
         canvas -> resizeSelectedUp();
@@ -95,12 +87,14 @@ void Application::onToolbarChange(bobcat::Widget* sender) {
     else if (action == RESIZE_DOWN) {
         canvas -> resizeSelectedDown();
     }
+
     canvas -> redraw();
 }
 
 void Application::onColorChange(bobcat::Widget* sender) {
     if (toolbar -> getTool() == SELECT) {
         Color color = colorSelector->getColor();
+
         canvas->recolorSelected(color.getR(), color.getG(), color.getB());
         canvas->redraw();
     }
@@ -115,7 +109,6 @@ Application::Application() {
 
     colorSelector = new ColorSelector(50, 650, 650,  50);
     colorSelector -> box(FL_BORDER_BOX);
-
 
     window -> add(toolbar);
     window -> add(canvas);
