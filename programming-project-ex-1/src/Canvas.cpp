@@ -2,7 +2,7 @@
 #include <GL/freeglut.h>
 #include <algorithm>
 
-Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x,y,w,h) {
+Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x,y,w,h), currentScribble(nullptr), selected(nullptr) {
     //
 }
 
@@ -141,5 +141,16 @@ void Canvas::undo() {
 void Canvas::render() {
     for (int i = 0; i < (int)shapes.size(); i++) {
         shapes[i] -> draw();
+    }
+}
+
+void Canvas::eraseAt(float x, float y) {
+    for (int i = (int)shapes.size() - 1; i >= 0; --i) {
+        if (shapes[i] -> contains(x, y)) {
+            delete shapes[i];
+            shapes.erase(shapes.begin() + i);
+            selected = nullptr;
+            break;
+        }
     }
 }
