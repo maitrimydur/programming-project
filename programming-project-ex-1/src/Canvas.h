@@ -41,6 +41,7 @@ public:
     void clear();
     void undo();
     void render() override;
+    void eraseAt(float x, float y);
 };
 
 #endif
