@@ -12,7 +12,7 @@ void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) 
         canvas -> startScribble(mx, my, color.getR(), color.getG(), color.getB(), 7);
     }
     else if (tool == ERASER) {
-        canvas -> startScribble(mx, my, 1.0, 1.0, 1.0, 14);
+        canvas -> eraseAt(mx, my);
     }
     else if (tool == SELECT) {
         canvas -> selectAt(mx, my);
@@ -43,7 +43,7 @@ void Application::onCanvasDrag(bobcat::Widget* sender, float mx, float my) {
         canvas -> addToScribble(mx, my, color.getR(), color.getG(), color.getB(), 7);
     }
     else if (tool == ERASER) {
-        canvas -> addToScribble(mx, my, 1.0, 1.0, 1.0, 14);
+        canvas -> eraseAt(mx, my);
     }
     else if (tool == SELECT) {
         float dx = mx - lastX;
@@ -59,7 +59,7 @@ void Application::onCanvasDrag(bobcat::Widget* sender, float mx, float my) {
 
 void Application::onCanvasMouseUp(bobcat::Widget* sender, float mx, float my) {
     TOOL tool = toolbar -> getTool();
-    if (tool == PENCIL || tool == ERASER) {
+    if (tool == PENCIL) {
         canvas -> finishScribble();
         canvas -> redraw();
     }
@@ -101,7 +101,7 @@ void Application::onColorChange(bobcat::Widget* sender) {
 }
 
 Application::Application() {
-    window = new Window(100, 100, 700, 700, "Paint Application");
+    window = new Window(100, 100, 700, 700, "Programming Project");
 
     toolbar = new Toolbar(0, 0, 50, 650);
 
