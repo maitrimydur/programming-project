@@ -2,6 +2,7 @@
 #define APPLICATION_H
 
 #include <bobcat_ui/all.h>
+#include <bobcat_ui/textbox.h>
 #include "Toolbar.h"
 #include "Canvas.h"
 #include "ColorSelector.h"
@@ -11,7 +12,10 @@ class Application : public bobcat::Application_ {
     Toolbar* toolbar;
     Canvas* canvas;
     ColorSelector* colorSelector;
-    
+    bobcat::TextBox* toolsText;
+    bobcat::TextBox* shapesText;
+    bobcat::TextBox* sizeText;
+        
     float lastX;
     float lastY;
 
