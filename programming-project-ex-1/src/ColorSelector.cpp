@@ -1,4 +1,5 @@
 #include "ColorSelector.h"
+#include "Enums.h"
 #include <GL/glext.h>
 using namespace bobcat;
 
@@ -10,6 +11,11 @@ void ColorSelector::deselectAllColors() {
     blueButton -> label("");
     indigoButton -> label("");
     violetButton -> label("");
+    pinkButton -> label("");
+    whiteButton -> label("");
+    lightGreyButton -> label("");
+    darkGreyButton -> label("");
+    blackButton -> label("");
 }
 
 void ColorSelector::visualizeSelectedColor() {
@@ -33,6 +39,21 @@ void ColorSelector::visualizeSelectedColor() {
     }
     else if (color == VIOLET) {
         violetButton -> label("@+5square");
+    }
+    else if (color == PINK) {
+        pinkButton -> label("@+5square");
+    }
+    else if (color == WHITE) {
+        whiteButton -> label("@+5square");
+    }
+    else if (color == LIGHT_GREY) {
+        lightGreyButton -> label("@+5square");
+    }
+    else if (color == DARK_GREY) {
+        darkGreyButton -> label("@+5square");
+    }
+    else if (color == BLACK) {
+        blackButton -> label("@+5square");
     }
 }
 
@@ -59,6 +80,21 @@ void ColorSelector::onClick(bobcat::Widget* sender) {
     }
     else if (sender == violetButton) {
         color = VIOLET;
+    }
+    else if (sender == pinkButton) {
+        color = PINK;
+    }
+    else if (sender == whiteButton) {
+        color = WHITE;
+    }
+    else if (sender == lightGreyButton) {
+        color = LIGHT_GREY;
+    }
+    else if (sender == darkGreyButton) {
+        color = DARK_GREY;
+    }
+    else if (sender == blackButton) {
+        color = BLACK;
     }
 
     visualizeSelectedColor();
@@ -91,19 +127,43 @@ Color ColorSelector::getColor() const {
     else if (color == VIOLET) {
         return Color(148/255.0, 0/255.0, 211/255.0);
     }
+
+    else if (color == PINK) {
+        return Color(255/255.0, 192/255.0, 203/255.0);
+    }
+    else if (color == WHITE) {
+        return Color(255/255.0, 255/255.0, 255/255.0);
+    }
+    else if (color == LIGHT_GREY) {
+        return Color(211/255.0, 211/255.0, 211/255.0);
+    }
+    else if (color == DARK_GREY) {
+        return Color(169/255.0, 169/255.0, 169/255.0);
+    }
+    else if (color == BLACK) {
+        return Color(0/255.0, 0/255.0, 0/255.0);
+    }
     else {
         return Color();
     }
 }
 
 ColorSelector::ColorSelector(int x, int y, int w, int h) : Group (x, y, w, h) {
-    redButton = new Button(x, y, 50, 50, "");
-    orangeButton = new Button(x + 50, y, 50, 50, "");
-    yellowButton = new Button(x + 100, y, 50, 50, "");
-    greenButton = new Button(x + 150, y, 50, 50, "");
-    blueButton = new Button(x + 200, y, 50, 50, "");
-    indigoButton = new Button(x + 250, y, 50, 50, "");
-    violetButton = new Button(x + 300, y, 50, 50, "");
+    redButton = new Button(x + 10, y + 50, 50, 50, "");
+    orangeButton = new Button(x + 70, y + 50, 50, 50, "");
+    yellowButton = new Button(x + 130, y + 50, 50, 50, "");
+    greenButton = new Button(x + 190, y + 50, 50, 50, "");
+    blueButton = new Button(x + 10, y + 110, 50, 50, "");
+    indigoButton = new Button(x + 70, y + 110, 50, 50, "");
+    violetButton = new Button(x + 130, y + 110, 50, 50, "");
+    pinkButton = new Button(x + 190, y + 110, 50, 50, "");
+    whiteButton = new Button(x + 10, y + 170, 50, 50, "");
+    lightGreyButton = new Button(x + 70, y + 170, 50, 50, "");
+    darkGreyButton = new Button(x + 130, y + 170, 50, 50, "");
+    blackButton = new Button(x + 190, y + 170, 50, 50, "");
+
+    colorsText = new TextBox(10, 470, 700, 25, "Colors");
+    colorsText -> labelsize(18);
 
     color = RED;
 
@@ -121,6 +181,16 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group (x, y, w, h) {
     indigoButton->labelcolor(FL_WHITE);
     violetButton->color(fl_rgb_color(148, 0, 211));
     violetButton->labelcolor(FL_WHITE);
+    pinkButton->color(fl_rgb_color(255, 192, 203));
+    pinkButton->labelcolor(FL_WHITE);
+    whiteButton->color(fl_rgb_color(255, 255, 255));
+    whiteButton->labelcolor(FL_WHITE);
+    lightGreyButton->color(fl_rgb_color(211, 211, 211));
+    lightGreyButton->labelcolor(FL_WHITE);
+    darkGreyButton->color(fl_rgb_color(169, 169, 169));
+    darkGreyButton->labelcolor(FL_WHITE);
+    blackButton->color(fl_rgb_color(0, 0, 0));
+    blackButton->labelcolor(FL_WHITE);
 
     visualizeSelectedColor();
 
@@ -131,4 +201,10 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group (x, y, w, h) {
     ON_CLICK(blueButton, ColorSelector::onClick);
     ON_CLICK(indigoButton, ColorSelector::onClick);
     ON_CLICK(violetButton, ColorSelector::onClick);
+
+    ON_CLICK(pinkButton, ColorSelector::onClick);
+    ON_CLICK(whiteButton, ColorSelector::onClick);
+    ON_CLICK(lightGreyButton, ColorSelector::onClick);
+    ON_CLICK(darkGreyButton, ColorSelector::onClick);
+    ON_CLICK(blackButton, ColorSelector::onClick);
 }
