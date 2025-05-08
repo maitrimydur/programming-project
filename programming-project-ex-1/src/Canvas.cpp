@@ -2,7 +2,7 @@
 #include <GL/freeglut.h>
 #include <algorithm>
 
-Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x,y,w,h), currentScribble(nullptr), selected(nullptr) {
+Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x, y, w, h), currentScribble(nullptr), selected(nullptr) {
     //
 }
 
