@@ -1,6 +1,9 @@
 #include "Application.h"
+#include "Color.h"
 #include "Enums.h"
+#include <FL/Enumerations.H>
 #include <bobcat_ui/bobcat_ui.h>
+#include <bobcat_ui/textbox.h>
 
 using namespace bobcat;
 
@@ -102,12 +105,18 @@ void Application::onColorChange(bobcat::Widget* sender) {
 
 Application::Application() {
     window = new Window(100, 100, 700, 700, "Programming Project");
+    
+    toolbar = new Toolbar(0, 0, 250, 450);
+    toolsText = new TextBox(10, 20, 250, 25, "Tools");
+    toolsText -> labelsize(18);
+    shapesText = new TextBox(10, 260, 250, 25, "Shapes");
+    shapesText -> labelsize(18);
+    sizeText = new TextBox(170, 260, 250, 25, "Size");
+    sizeText -> labelsize(18);
 
-    toolbar = new Toolbar(0, 0, 50, 650);
+    canvas = new Canvas (250, 0, 450, 450);
 
-    canvas = new Canvas (50, 0, 650, 650);
-
-    colorSelector = new ColorSelector(50, 650, 650,  50);
+    colorSelector = new ColorSelector(0, 450, 700,  250);
     colorSelector -> box(FL_BORDER_BOX);
 
     window -> add(toolbar);
