@@ -12,10 +12,8 @@ class Application : public bobcat::Application_ {
     Toolbar* toolbar;
     Canvas* canvas;
     ColorSelector* colorSelector;
-    bobcat::TextBox* toolsText;
-    bobcat::TextBox* shapesText;
-    bobcat::TextBox* sizeText;
-        
+    
+
     float lastX;
     float lastY;
 
