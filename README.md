@@ -2,6 +2,8 @@
 
 This paint application, built with the Bobcat UI framework and OpenGL, offers freehand drawing, shape creation, object selection and manipulation, color selection, and action controls. It uses a **TOOL** enum (`PENCIL`, `ERASER`, `SELECT`, `RECTANGLE`, `CIRCLE`, `TRIANGLE`, `POLYGON`) to switch modes and an **ACTION** enum (`NONE`, `UNDO`, `CLEAR`, `BRING_TO_FRONT`, `SEND_TO_BACK`, `RESIZE_UP`, `RESIZE_DOWN`) to perform canvas operations. Users can draw continuous scribbles, place geometric shapes with a click, erase or clear the canvas, undo the last change, reorder or resize objects, and apply color via twelve preset swatches (`RED`, `ORANGE`, `YELLOW`, `GREEN`, `BLUE`, `INDIGO`, `VIOLET`, `PINK`, `WHITE`, `LIGHT_GREY`, `DARK_GREY`, `BLACK`) or custom RGB values.
 
+<img width="698" alt="Screen Shot 2025-05-09 at 4 36 42 PM" src="https://github.com/user-attachments/assets/d4aab93a-a9f8-47e2-8e85-c93ee0b4bb09" />
+
 ## **Code Structure**
 
 All source code resides in `src/`, organized as follows:
