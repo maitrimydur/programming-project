@@ -6,7 +6,7 @@ Color::Color() {
     b = 0.0;
 }
 
-Color::Color(float red, float green, float blue) {
+Color::Color(float red, float green, float blue) : Color() {
     r = red;
     g = green;
     b = blue;
