@@ -21,7 +21,6 @@ public:
     void moveBy(float dx, float dy) override;
     void resize(float factor) override;
     void setColor(float nr, float ng, float nb) override;
-
 };
 
 #endif
