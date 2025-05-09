@@ -13,7 +13,6 @@ class Application : public bobcat::Application_ {
     Canvas* canvas;
     ColorSelector* colorSelector;
     
-
     float lastX;
     float lastY;
 
