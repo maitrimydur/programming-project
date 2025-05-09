@@ -17,8 +17,8 @@ Rectangle::Rectangle(float mx, float my, float red, float green, float blue) : R
     width = 0.2;
     height = 0.2;
     r = red;
-    g = blue;
-    b = green;
+    g = green;
+    b = blue;
 }
 
 void Rectangle::draw() {
