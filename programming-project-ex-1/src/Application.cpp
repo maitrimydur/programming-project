@@ -107,20 +107,15 @@ Application::Application() {
     window = new Window(100, 100, 700, 700, "Programming Project");
     
     toolbar = new Toolbar(0, 0, 250, 450);
-    toolsText = new TextBox(10, 20, 250, 25, "Tools");
-    toolsText -> labelsize(18);
-    shapesText = new TextBox(10, 260, 250, 25, "Shapes");
-    shapesText -> labelsize(18);
-    sizeText = new TextBox(170, 260, 250, 25, "Size");
-    sizeText -> labelsize(18);
 
     canvas = new Canvas (250, 0, 450, 450);
+    canvas -> box(FL_BORDER_FRAME);
+    canvas -> color(FL_BLACK);
 
     colorSelector = new ColorSelector(0, 450, 700,  250);
-    colorSelector -> box(FL_BORDER_BOX);
 
-    window -> add(toolbar);
     window -> add(canvas);
+    window -> add(toolbar);
     window -> add(colorSelector);
 
     ON_MOUSE_DOWN(canvas, Application::onCanvasMouseDown);
