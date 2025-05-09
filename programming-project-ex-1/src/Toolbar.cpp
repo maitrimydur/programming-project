@@ -147,12 +147,23 @@ Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h), tool(PENCIL), 
     plusButton = new Image(x + 170, y + 290, 50, 50, "./assets/plus.png");
     minusButton = new Image(x + 170, y + 350, 50, 50, "./assets/minus.png");
 
-
-    
-    
+    toolsText = new TextBox(10, 20, 250, 25, "Tools");
+    toolsText -> labelsize(18);
+    toolsText -> labelcolor(FL_BLACK);
+    toolsText -> labelfont(FL_HELVETICA_BOLD);
+    shapesText = new TextBox(10, 260, 250, 25, "Shapes");
+    shapesText -> labelsize(18);
+    shapesText -> labelcolor(FL_BLACK);
+    shapesText -> labelfont(FL_HELVETICA_BOLD);
+    sizeText = new TextBox(170, 260, 250, 25, "Size");
+    sizeText -> labelsize(18);
+    sizeText -> labelcolor(FL_BLACK);
+    sizeText -> labelfont(FL_HELVETICA_BOLD);
 
     tool = PENCIL;
     action = NONE;
+
+    
 
     pencilButton -> box(FL_BORDER_BOX);
     eraserButton -> box(FL_BORDER_BOX);
