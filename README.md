@@ -6,12 +6,12 @@ This paint application, built with the Bobcat UI framework and OpenGL, offers fr
 
 All source code resides in `src/`, organized as follows:
 
-- **Application** (`Application.cpp`, `Application.h`): Sets up the window, instantiates the `Canvas`, `Toolbar`, and `ColorSelector`, and maps mouse and toolbar events to methods based on the `TOOL` and `ACTION` enums.
-- **Canvas** (`Canvas.cpp`, `Canvas.h`): Manages a single container of `Shape*` and `Scribble*` objects, handles OpenGL rendering, and implements methods such as `startScribble`, `addRectangle`, `selectAt`, `moveSelected`, `resizeSelectedUp/Down`, `recolorSelected`, `bringToFront`, `sendToBack`, `eraseAt`, `clear`, and `undo`.
-- **Toolbar** (`Toolbar.cpp`, `Toolbar.h`): Defines buttons for each tool and action, handles clicks to update the current `tool` or `action` enum, and visually highlights the active button.
-- **ColorSelector** (`ColorSelector.cpp`, `ColorSelector.h`): Implements an RGB slider widget with twelve preset color swatches and custom RGB inputs, firing change events to recolor the selected object.
-- **Enums** (`Enums.h`): Defines the `TOOL`, `ACTION`, and `COLOR` enums.
-- **Shapes** (`shapes/`): Contains `Shape.h` (abstract base class), `Rectangle.cpp/h`, `Circle.cpp/h`, `Triangle.cpp/h`, `Polygon.cpp/h` for geometric shapes, `Scribble.cpp/h` for freehand strokes, and `Point.cpp/h` as the primitive drawing unit.
+- **Application:** (`Application.cpp`, `Application.h`): Sets up the window, instantiates the `Canvas`, `Toolbar`, and `ColorSelector`, and maps mouse and toolbar events to methods based on the `TOOL` and `ACTION` enums.
+- **Canvas:** (`Canvas.cpp`, `Canvas.h`): Manages a single container of `Shape*` and `Scribble*` objects, handles OpenGL rendering, and implements methods such as `startScribble`, `addRectangle`, `selectAt`, `moveSelected`, `resizeSelectedUp/Down`, `recolorSelected`, `bringToFront`, `sendToBack`, `eraseAt`, `clear`, and `undo`.
+- **Toolbar:** (`Toolbar.cpp`, `Toolbar.h`): Defines buttons for each tool and action, handles clicks to update the current `tool` or `action` enum, and visually highlights the active button.
+- **ColorSelector:** (`ColorSelector.cpp`, `ColorSelector.h`): Implements an RGB slider widget with twelve preset color swatches and custom RGB inputs, firing change events to recolor the selected object.
+- **Enums:** (`Enums.h`): Defines the `TOOL`, `ACTION`, and `COLOR` enums.
+- **Shapes:** (`shapes/`): Contains `Shape.h` (abstract base class), `Rectangle.cpp/h`, `Circle.cpp/h`, `Triangle.cpp/h`, `Polygon.cpp/h` for geometric shapes, `Scribble.cpp/h` for freehand strokes, and `Point.cpp/h` as the primitive drawing unit.
 
 ## **Usage**
 
