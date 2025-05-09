@@ -18,6 +18,10 @@ class Toolbar : public bobcat::Group {
     bobcat::Image* sendBackButton;
     bobcat::Image* plusButton;
     bobcat::Image* minusButton;
+
+    bobcat::TextBox* toolsText;
+    bobcat::TextBox* shapesText;
+    bobcat::TextBox* sizeText;
     
     TOOL tool;
     ACTION action;
