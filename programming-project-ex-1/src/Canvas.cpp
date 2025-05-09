@@ -1,9 +1,14 @@
 #include "Canvas.h"
+#include <FL/Enumerations.H>
 #include <GL/freeglut.h>
 #include <algorithm>
 
-Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x, y, w, h), currentScribble(nullptr), selected(nullptr) {
-    //
+Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x, y, w, h) {
+    currentScribble = nullptr;
+    selected = nullptr;
+    
+    box(FL_FLAT_BOX);
+    color(fl_rgb_color(213, 231, 239));
 }
 
 Canvas::~Canvas() {
@@ -139,6 +144,9 @@ void Canvas::undo() {
 }
 
 void Canvas::render() {
+    glClearColor(213.0/255.0, 231.0/255.0, 239.0/255.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     for (int i = 0; i < (int)shapes.size(); i++) {
         shapes[i] -> draw();
     }
