@@ -4,19 +4,19 @@
 using namespace bobcat;
 
 void Toolbar::deselectAllTools() {
-    pencilButton -> color(FL_BACKGROUND_COLOR);
-    eraserButton -> color(FL_BACKGROUND_COLOR);
-    circleButton -> color(FL_BACKGROUND_COLOR);
-    triangleButton -> color(FL_BACKGROUND_COLOR);
-    rectangleButton -> color(FL_BACKGROUND_COLOR);
-    polygonButton -> color(FL_BACKGROUND_COLOR);
-    selectButton -> color(FL_BACKGROUND_COLOR);
-    undoButton -> color(FL_BACKGROUND_COLOR);
-    clearButton -> color(FL_BACKGROUND_COLOR);
-    bringFrontButton -> color(FL_BACKGROUND_COLOR);
-    sendBackButton -> color(FL_BACKGROUND_COLOR);
-    plusButton -> color(FL_BACKGROUND_COLOR);
-    minusButton -> color(FL_BACKGROUND_COLOR);
+    pencilButton -> color(fl_rgb_color(245, 233, 211));
+    eraserButton -> color(fl_rgb_color(245, 233, 211));
+    circleButton -> color(fl_rgb_color(245, 233, 211));
+    triangleButton -> color(fl_rgb_color(245, 233, 211));
+    rectangleButton -> color(fl_rgb_color(245, 233, 211));
+    polygonButton -> color(fl_rgb_color(245, 233, 211));
+    selectButton -> color(fl_rgb_color(245, 233, 211));
+    undoButton -> color(fl_rgb_color(245, 233, 211));
+    clearButton -> color(fl_rgb_color(245, 233, 211));
+    bringFrontButton -> color(fl_rgb_color(245, 233, 211));
+    sendBackButton -> color(fl_rgb_color(245, 233, 211));
+    plusButton -> color(fl_rgb_color(245, 233, 211));
+    minusButton -> color(fl_rgb_color(245, 233, 211));
 }
 
 void Toolbar::clearAction() {
@@ -129,57 +129,51 @@ ACTION Toolbar::getAction() const {
     return action; 
 }
 
-Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h), tool(PENCIL), action(NONE) {
+Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     pencilButton = new Image(x + 10, y + 50, 50, 50, "./assets/pencil.png");
+    pencilButton -> box(FL_BORDER_BOX);
     eraserButton = new Image(x + 70, y + 50, 50, 50, "./assets/eraser.png");
+    eraserButton -> box(FL_BORDER_BOX);
     selectButton = new Image(x + 130, y + 50, 50, 50,"./assets/mouse.png");
+    selectButton -> box(FL_BORDER_BOX);
     undoButton = new Image(x + 10, y + 110, 50, 50,"./assets/undo.png");
+    undoButton -> box(FL_BORDER_BOX);
     clearButton = new Image(x + 70, y + 110, 50, 50,"./assets/clear.png");
+    clearButton -> box(FL_BORDER_BOX);
     bringFrontButton = new Image(x + 130, y + 110, 50, 50,"./assets/bring-to-front.png");
+    bringFrontButton -> box(FL_BORDER_BOX);
     sendBackButton = new Image(x + 10, y + 170, 50, 50,"./assets/send-to-back.png");
-
-
+    sendBackButton -> box(FL_BORDER_BOX);
     circleButton = new Image(x + 10, y + 290, 50, 50,"./assets/circle.png");
+    circleButton -> box(FL_BORDER_BOX);
     triangleButton = new Image(x + 70, y + 290, 50,50,"./assets/triangle.png");
+    triangleButton -> box(FL_BORDER_BOX);
     rectangleButton = new Image(x + 10, y + 350, 50,50,"./assets/rectangle.png");
+    rectangleButton -> box(FL_BORDER_BOX);
     polygonButton = new Image(x + 70, y + 350, 50, 50,"./assets/polygon.png");
-
+    polygonButton -> box(FL_BORDER_BOX);
     plusButton = new Image(x + 170, y + 290, 50, 50, "./assets/plus.png");
+    plusButton -> box(FL_BORDER_BOX);
     minusButton = new Image(x + 170, y + 350, 50, 50, "./assets/minus.png");
+    minusButton -> box(FL_BORDER_BOX);
 
     toolsText = new TextBox(10, 20, 250, 25, "Tools");
     toolsText -> labelsize(18);
-    toolsText -> labelcolor(FL_BLACK);
+    toolsText -> labelcolor(fl_rgb_color(30, 41, 45));
     toolsText -> labelfont(FL_HELVETICA_BOLD);
     shapesText = new TextBox(10, 260, 250, 25, "Shapes");
     shapesText -> labelsize(18);
-    shapesText -> labelcolor(FL_BLACK);
+    shapesText -> labelcolor(fl_rgb_color(30, 41, 45));
     shapesText -> labelfont(FL_HELVETICA_BOLD);
     sizeText = new TextBox(170, 260, 250, 25, "Size");
     sizeText -> labelsize(18);
-    sizeText -> labelcolor(FL_BLACK);
+    sizeText -> labelcolor(fl_rgb_color(30, 41, 45));
     sizeText -> labelfont(FL_HELVETICA_BOLD);
 
     tool = PENCIL;
     action = NONE;
-
-    
-
-    pencilButton -> box(FL_BORDER_BOX);
-    eraserButton -> box(FL_BORDER_BOX);
-    circleButton -> box(FL_BORDER_BOX);
-    triangleButton -> box(FL_BORDER_BOX);
-    rectangleButton -> box(FL_BORDER_BOX);
-    polygonButton -> box(FL_BORDER_BOX);
-    selectButton -> box(FL_BORDER_BOX);
-    undoButton -> box(FL_BORDER_BOX);
-    clearButton -> box(FL_BORDER_BOX);
-    bringFrontButton -> box(FL_BORDER_BOX);
-    sendBackButton -> box(FL_BORDER_BOX);
-    plusButton -> box(FL_BORDER_BOX);
-    minusButton -> box(FL_BORDER_BOX);
-
-    visualizeSelectedTool();
+    box(FL_FLAT_BOX);
+    color(fl_rgb_color(134, 158, 164));
 
     ON_CLICK(pencilButton, Toolbar::onClick);
     ON_CLICK(eraserButton, Toolbar::onClick);
@@ -194,4 +188,6 @@ Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h), tool(PENCIL), 
     ON_CLICK(sendBackButton, Toolbar::onClick);
     ON_CLICK(plusButton, Toolbar::onClick);
     ON_CLICK(minusButton, Toolbar::onClick);
+
+    visualizeSelectedTool();
 }
