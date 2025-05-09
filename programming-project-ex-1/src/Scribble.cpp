@@ -37,13 +37,13 @@ void Scribble::setColor(float nr, float ng, float nb) {
     }
 }
 
+bool Scribble::isScribble() const {
+    return true;
+}
+
 Scribble::~Scribble() {
     for (int i = 0; i < (int)points.size(); i++) {
         delete points[i];
     }
     points.clear();
-}
-
-bool Scribble::isScribble() const {
-    return true;
 }
