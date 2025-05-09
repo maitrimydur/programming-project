@@ -2,12 +2,24 @@
 #include <GL/freeglut.h>
 #include <cmath>
 
-Polygon::Polygon() : x(0.0), y(0.0), sides(5), length(0.1), r(0.0), g(0.0), b(0.0) {
-    //
+Polygon::Polygon() {
+    x = 0.0;
+    y = 0.0;
+    sides = 5;
+    length = 0.1;
+    r = 0.0;
+    g = 0.0;
+    b = 0.0;
 }
 
-Polygon::Polygon(float xx, float yy, float rr, float gg, float bb) : x(xx), y(yy), sides(5), length(0.1), r(rr), g(gg), b(bb) {
-    //
+Polygon::Polygon(float mx, float my, float red, float green, float blue) : Polygon() {
+    x = mx;
+    y = my;
+    sides = 5;
+    length = 0.1;
+    r = red;
+    g = green;
+    b = blue;
 }
 
 void Polygon::draw() {
@@ -20,13 +32,13 @@ void Polygon::draw() {
             glVertex2f(x + length * cos(theta), y + length * sin(theta));
             theta = theta + inc;
         }
-
     glEnd();
 }
 
 bool Polygon::contains(float mx, float my) {
     float dx = mx - x;
     float dy = my - y;
+
     if (dx >= -length && dx <= length && dy >= -length && dy <= length) {
         return true;
     }
@@ -42,6 +54,7 @@ void Polygon::moveBy(float dx, float dy) {
 
 void Polygon::resize(float factor) {
     length = length * factor;
+    
     if (length < 0.05) {
         length = 0.05;
     }
