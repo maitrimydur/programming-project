@@ -13,6 +13,7 @@ void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) 
 
     if (tool == PENCIL) {
         canvas -> startScribble(mx, my, color.getR(), color.getG(), color.getB(), 7);
+        colorSelector -> updateRGBInputs();
     }
     else if (tool == ERASER) {
         canvas -> eraseAt(mx, my);
@@ -22,15 +23,19 @@ void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) 
     }
     else if (tool == RECTANGLE) {
         canvas -> addRectangle(mx, my, color.getR(), color.getG(), color.getB());
+        colorSelector -> updateRGBInputs();
     }
     else if (tool == CIRCLE) {
         canvas -> addCircle(mx, my, color.getR(), color.getG(), color.getB());
+        colorSelector -> updateRGBInputs();
     }
     else if (tool == TRIANGLE) {
         canvas -> addTriangle(mx, my, color.getR(), color.getG(), color.getB());
+        colorSelector -> updateRGBInputs();
     }
     else if (tool == POLYGON) {
         canvas -> addPolygon(mx, my, color.getR(), color.getG(), color.getB());
+        colorSelector -> updateRGBInputs();
     }
 
     lastX = mx;
@@ -98,8 +103,8 @@ void Application::onColorChange(bobcat::Widget* sender) {
     if (toolbar -> getTool() == SELECT) {
         Color color = colorSelector->getColor();
 
-        canvas->recolorSelected(color.getR(), color.getG(), color.getB());
-        canvas->redraw();
+        canvas -> recolorSelected(color.getR(), color.getG(), color.getB());
+        canvas -> redraw();
     }
 }
 
