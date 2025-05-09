@@ -1,12 +1,24 @@
 #include "Triangle.h"
 #include <GL/freeglut.h>
 
-Triangle::Triangle() : x(0.0), y(0.0), base(0.2), height(0.2), r(0.0), g(0.0), b(0.0) {
-    //
+Triangle::Triangle() {
+    x = 0.0;
+    y = 0.0;
+    base = 0.2;
+    height = 0.2;
+    r = 0.0;
+    g = 0.0;
+    b = 0.0;
 }
 
-Triangle::Triangle(float xx, float yy, float rr, float gg, float bb): x(xx), y(yy), base(0.2), height(0.2), r(rr), g(gg), b(bb) {
-    //
+Triangle::Triangle(float mx, float my, float red, float green, float blue) : Triangle() {
+    x = mx;
+    y = my;
+    base = 0.2;
+    height = 0.2;
+    r = red;
+    g = green;
+    b = blue;
 }
 
 void Triangle::draw() {
