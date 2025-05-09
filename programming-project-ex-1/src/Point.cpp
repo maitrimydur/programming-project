@@ -2,12 +2,22 @@
 #include <GL/freeglut.h>
 #include <cmath>
 
-Point::Point() : x(0.0), y(0.0), r(0.0), g(0.0), b(0.0), size(7) {
-    //
+Point::Point() {
+    x = 0.0;
+    y = 0.0;
+    r = 0.0;
+    g = 0.0;
+    b = 0.0;
+    size = 7;
 }
 
-Point::Point(float x, float y, float rr, float gg, float bb, int s) : x(x), y(y), r(rr), g(gg), b(bb), size(s) {
-    //
+Point::Point(float mx, float my, float red, float green, float blue, int s) : Point() {
+    x = mx;
+    y = my;
+    r = red;
+    g = green;
+    b = blue;
+    size = s;
 }
 
 void Point::draw() {
