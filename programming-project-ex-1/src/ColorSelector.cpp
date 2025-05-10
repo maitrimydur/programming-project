@@ -3,6 +3,7 @@
 #include <FL/Enumerations.H>
 #include <FL/fl_draw.H>
 #include <GL/glext.h>
+#include <bobcat_ui/bobcat_ui.h>
 #include <bobcat_ui/textbox.h>
 #include <string>
 
@@ -236,6 +237,11 @@ void ColorSelector::onClearInputs(bobcat::Widget*) {
 
 // Applies the custom RGB values or falls back to the closest color present
 void ColorSelector::onConfirmColor(bobcat::Widget*) {
+    if (redColorValue -> empty() || greenColorValue -> empty() || blueColorValue -> empty()) {
+        showMessage("Select or enter RGB of a color.");
+        return;
+    }
+
     lastConfirmedR = clampInt(redColorValue  -> value(), 0, 255);
     lastConfirmedG = clampInt(greenColorValue-> value(), 0, 255);
     lastConfirmedB = clampInt(blueColorValue -> value(), 0, 255);
@@ -281,7 +287,7 @@ void ColorSelector::onConfirmColor(bobcat::Widget*) {
     else {
       usingCustomColor = true;
     }
-
+    
     visualizeSelectedColor();
 
     if (onChangeCb) {
