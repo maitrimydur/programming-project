@@ -2,6 +2,7 @@
 #include <GL/freeglut.h>
 #include <cmath>
 
+// Default constructor that contains origin point, the color black, and the default size
 Point::Point() {
     x = 0.0;
     y = 0.0;
@@ -11,6 +12,7 @@ Point::Point() {
     size = 7;
 }
 
+// Parameterized constructor that initializes the position, the color, and the size
 Point::Point(float mx, float my, float red, float green, float blue, int s) : Point() {
     x = mx;
     y = my;
@@ -20,6 +22,7 @@ Point::Point(float mx, float my, float red, float green, float blue, int s) : Po
     size = s;
 }
 
+// Draws the point as a GL_POINT with its current size and color
 void Point::draw() {
     glColor3f(r, g, b);
     glPointSize(size);
@@ -28,6 +31,7 @@ void Point::draw() {
     glEnd();
 }
 
+// Returns true if the (mx, my) position lies within half the point's size radius
 bool Point::contains(float mx, float my) {
     float dx = mx - x;
     float dy = my - y;
@@ -42,11 +46,13 @@ bool Point::contains(float mx, float my) {
     }
 }
 
+// Moves the point by its specified delta
 void Point::moveBy(float dx, float dy) {
     x = x + dx;
     y = y + dy;
 }
 
+// Resizes the point by either incrementing or decrementing its size, but makes sure to enforce a minimum size of 1
 void Point::resize(float factor) {
     if (factor > 1) {
         size = size + 1;
@@ -60,6 +66,7 @@ void Point::resize(float factor) {
     }
 }
 
+// Changes the point's color to the new RGB values selected
 void Point::setColor(float nr, float ng, float nb) {
     r = nr;
     g = ng;
