@@ -1,6 +1,7 @@
 #include "Rectangle.h"
 #include <GL/freeglut.h>
 
+// Default constructor that positions at the origin, selects the default size and default color black
 Rectangle::Rectangle() {
     x = 0.0;
     y = 0.0;
@@ -11,6 +12,7 @@ Rectangle::Rectangle() {
     b = 0.0;
 }
 
+// Parameterized constructor that sets the position and color but keeps the default size
 Rectangle::Rectangle(float mx, float my, float red, float green, float blue) : Rectangle() {
     x = mx;
     y = my;
@@ -21,6 +23,7 @@ Rectangle::Rectangle(float mx, float my, float red, float green, float blue) : R
     b = blue;
 }
 
+// Renders the rectangle as a filled rectangle
 void Rectangle::draw() {
     glColor3f(r, g, b);
     glBegin(GL_POLYGON);
@@ -31,6 +34,7 @@ void Rectangle::draw() {
     glEnd();
 }
 
+// Checks if a point is in the rectangle bounds
 bool Rectangle::contains(float mx, float my) {
     if (mx >= x - width/2 && mx <= x + width/2 && my >= y - height/2 && my <= y + height/2) {
         return true;
@@ -40,11 +44,13 @@ bool Rectangle::contains(float mx, float my) {
     }
 }
 
+// Translates the rectangle's position by the given delta
 void Rectangle::moveBy(float dx, float dy) {
     x = x + dx;
     y = y + dy;
 }
 
+// Scales the rectangle dimensions with a limit for the minimum
 void Rectangle::resize(float factor) {
     width = width * factor;
     height = height * factor;
@@ -58,6 +64,7 @@ void Rectangle::resize(float factor) {
     }
 }
 
+// Sets the colors based on the RGB values
 void Rectangle::setColor(float nr, float ng, float nb) {
     r = nr;
     g = ng;
