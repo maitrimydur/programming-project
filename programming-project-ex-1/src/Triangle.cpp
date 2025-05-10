@@ -1,6 +1,7 @@
 #include "Triangle.h"
 #include <GL/freeglut.h>
 
+// Default constructor that initializes at the center of (0, 0), the default base/height, and the default color of black
 Triangle::Triangle() {
     x = 0.0;
     y = 0.0;
@@ -11,6 +12,7 @@ Triangle::Triangle() {
     b = 0.0;
 }
 
+// Parameterized constructor that sets the center and color as it keeps the default dimensions
 Triangle::Triangle(float mx, float my, float red, float green, float blue) : Triangle() {
     x = mx;
     y = my;
@@ -21,6 +23,7 @@ Triangle::Triangle(float mx, float my, float red, float green, float blue) : Tri
     b = blue;
 }
 
+// Renders an isosceles triangle using the current color
 void Triangle::draw() {
     glColor3f(r, g, b);
     glBegin(GL_POLYGON);
@@ -30,6 +33,7 @@ void Triangle::draw() {
     glEnd();
 }
 
+// Simple bounding-box test for the area of the triangle
 bool Triangle::contains(float mx, float my) {
     float minx = x - base/2;
     float maxx = x + base/2;
@@ -44,11 +48,13 @@ bool Triangle::contains(float mx, float my) {
     }
 }
 
+// Translates the triangle center by the (dx, dy) position
 void Triangle::moveBy(float dx, float dy) {
     x = x + dx;
     y = y + dy;
 }
 
+// Scales the base and height while enforcing a minimum limit
 void Triangle::resize(float factor) {
     base   = base * factor;
     height = height * factor;
@@ -62,6 +68,7 @@ void Triangle::resize(float factor) {
     }
 }
 
+// Updates the triangle's RGB components
 void Triangle::setColor(float nr, float ng, float nb) {
     r = nr;
     g = ng;
