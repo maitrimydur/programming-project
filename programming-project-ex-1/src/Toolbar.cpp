@@ -3,6 +3,7 @@
 #include <FL/Enumerations.H>
 using namespace bobcat;
 
+// Resets all toolbar buttons to their default color
 void Toolbar::deselectAllTools() {
     pencilButton -> color(fl_rgb_color(245, 233, 211));
     eraserButton -> color(fl_rgb_color(245, 233, 211));
@@ -19,13 +20,16 @@ void Toolbar::deselectAllTools() {
     minusButton -> color(fl_rgb_color(245, 233, 211));
 }
 
+// Resets the current ACTION enum to NONE
 void Toolbar::clearAction() {
     action = NONE;
 }
 
+// Highlights the tool or action that is active white
 void Toolbar::visualizeSelectedTool() {
     deselectAllTools();
 
+    // Highlights based on the current ACTION enum
     if (action == UNDO) {
         undoButton -> color(FL_WHITE);
     }
@@ -45,6 +49,7 @@ void Toolbar::visualizeSelectedTool() {
         minusButton -> color(FL_WHITE);
     }
     else {
+        // Highlights based on the current TOOL enum
         if(tool == PENCIL) {
             pencilButton -> color(FL_WHITE);
         }
@@ -69,6 +74,7 @@ void Toolbar::visualizeSelectedTool() {
     }
 }
 
+// Handles the toolbar button clicks, updates the TOOL/ACTION enums, triggers changes to callback, and redraws based on the changes
 void Toolbar::onClick(bobcat::Widget* sender) {
     deselectAllTools();
     action = NONE;
@@ -121,14 +127,17 @@ void Toolbar::onClick(bobcat::Widget* sender) {
     redraw();
 }
 
+// Returns the current TOOL enum
 TOOL Toolbar::getTool() const { 
     return tool; 
 }
 
+// Returns the current ACTION enum
 ACTION Toolbar::getAction() const {
     return action; 
 }
 
+// Creates the buttons,the  text labels, the sets initial states, and the registers callbacks
 Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     pencilButton = new Image(x + 10, y + 50, 50, 50, "./assets/pencil.png");
     pencilButton -> box(FL_BORDER_BOX);
@@ -156,7 +165,6 @@ Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     plusButton -> box(FL_BORDER_BOX);
     minusButton = new Image(x + 170, y + 350, 50, 50, "./assets/minus.png");
     minusButton -> box(FL_BORDER_BOX);
-
     toolsText = new TextBox(10, 20, 250, 25, "Tools");
     toolsText -> labelsize(18);
     toolsText -> labelcolor(fl_rgb_color(30, 41, 45));
@@ -170,11 +178,15 @@ Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     sizeText -> labelcolor(fl_rgb_color(30, 41, 45));
     sizeText -> labelfont(FL_HELVETICA_BOLD);
 
+    // Default TOOL enum and ACTION enum
     tool = PENCIL;
     action = NONE;
+
+    // Initializes the buttons and labels
     box(FL_FLAT_BOX);
     color(fl_rgb_color(134, 158, 164));
 
+    // Registers the callbacks based on clicks
     ON_CLICK(pencilButton, Toolbar::onClick);
     ON_CLICK(eraserButton, Toolbar::onClick);
     ON_CLICK(circleButton, Toolbar::onClick);
