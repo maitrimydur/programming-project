@@ -1,66 +1,54 @@
+#ifndef CANVAS_H
+#define CANVAS_H
+
+#include <bobcat_ui/all.h>
+#include <vector>
+#include "Shape.h"
+#include "Point.h"
+#include "Rectangle.h"
 #include "Circle.h"
-#include <GL/freeglut.h>
-#include <cmath>
+#include "Triangle.h"
+#include "Polygon.h"
+#include "Scribble.h"
 
-Circle::Circle() {
-    x = 0.0;
-    y = 0.0;
-    radius = 0.1;
-    r = 0.0;
-    g = 0.0;
-    b = 0.0;
-}
-
-Circle::Circle(float mx, float my, float red, float green, float blue) : Circle() {
-    x = mx;
-    y = my;
-    radius = 0.1;
-    r = red;
-    g = green;
-    b = blue;
-}
-
-void Circle::draw() {
-    glColor3f(r, g, b);
-    glBegin(GL_POLYGON);
-        float inc = 2 * M_PI / 60;
-        float theta = 0.0;
-
-        while (theta <= 2 * M_PI) {
-            glVertex2f(x + radius * cos(theta), y + radius * sin(theta));
-            theta = theta + inc;
-        }
-
-    glEnd();
-}
-
-bool Circle::contains(float mx, float my) {
-    float dx = mx - x;
-    float dy = my - y;
+// Canvas class that extends the Bobcat canvas widgets to store and manage the objects to draw
+class Canvas : public bobcat::Canvas_ {
+    std::vector<Shape*> shapes;
+    Scribble* currentScribble;
+    Shape* selected;
     
-    if (dx * dx + dy * dy <= radius * radius) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
+public:
+    // Constructors a canvas at (x, y) postion with width w and height h
+    Canvas(int x, int y, int w, int h);
+    // Deletes all the shapes and cleans it up
+    ~Canvas();
 
-void Circle::moveBy(float dx, float dy) {
-    x = x + dx;
-    y = y + dy;
-}
+    // Methods to draw freehandedly
+    void startScribble(float x, float y, float r, float g, float b, int size);
+    void addToScribble(float x, float y, float r, float g, float b, int size);
+    void finishScribble();
 
-void Circle::resize(float factor) {
-    radius = radius * factor;
+    // Creates shapes to add on Canvas
+    void addRectangle(float x, float y, float r, float g, float b);
+    void addCircle(float x, float y, float r, float g, float b);
+    void addTriangle(float x, float y, float r, float g, float b);
+    void addPolygon(float x, float y, float r, float g, float b);
 
-    if (radius < 0.05) {
-        radius = 0.05;
-    }
-}
+    // Uses manipulation based on the selection
+    void selectAt(float x, float y);
+    void moveSelected(float dx, float dy);
+    void resizeSelected(float factor);
+    void recolorSelected(float r, float g, float b);
+    void bringToFront();
+    void sendToBack();
+    void resizeSelectedUp();
+    void resizeSelectedDown();
 
-void Circle::setColor(float nr, float ng, float nb) {
-    r = nr;
-    g = ng;
-    b = nb;
-}
+    // Controls that Canvas provides
+    void clear();
+    void undo();
+    void render() override;
+    void eraseAt(float x, float y);
+};
+
+#endif
