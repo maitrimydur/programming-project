@@ -8,6 +8,7 @@
 
 using namespace bobcat;
 
+// Helper function that clamps the integer to a [minVal, maxVal]
 int clampInt(int value, int minVal, int maxVal) {
     if (value < minVal) {
         return minVal;
@@ -20,6 +21,7 @@ int clampInt(int value, int minVal, int maxVal) {
     return value;
 }
 
+// Deselects all the colors as default
 void ColorSelector::deselectAllColors() {
     redButton -> label("");
     orangeButton -> label("");
@@ -35,6 +37,7 @@ void ColorSelector::deselectAllColors() {
     blackButton -> label("");
 }
 
+// Highlights the chosen color button
 void ColorSelector::visualizeSelectedColor() {
     deselectAllColors();
 
@@ -80,11 +83,13 @@ void ColorSelector::visualizeSelectedColor() {
     }
 }
 
+// Selects a color
 void ColorSelector::onClick(bobcat::Widget* sender) {
     usingCustomColor = false;
 
     deselectAllColors();
 
+    // Finds which color button was clicked
     if (sender == redButton) {
         color = RED;
     }
@@ -141,6 +146,7 @@ void ColorSelector::onClick(bobcat::Widget* sender) {
     }
 }
 
+// Retrieves the current color if its preset or a custom RGB
 Color ColorSelector::getColor() const {
     if (usingCustomColor) {
         return Color(lastConfirmedR/255.0, lastConfirmedG/255.0, lastConfirmedB/255.0);
@@ -187,6 +193,7 @@ Color ColorSelector::getColor() const {
     }
 }
 
+// Increments/decrements the RGB values before confirming to use a color
 void ColorSelector::onAdjustColor(bobcat::Widget* sender) {
     int r = redColorValue->value();
     int g = greenColorValue->value();
@@ -220,12 +227,14 @@ void ColorSelector::onAdjustColor(bobcat::Widget* sender) {
     ((Fl_Input*)blueColorValue) -> value(std::to_string(b).c_str());
 }
 
+// Clears the custom RGB input fields
 void ColorSelector::onClearInputs(bobcat::Widget*) {
     ((Fl_Input*)redColorValue) -> value("");
     ((Fl_Input*)greenColorValue) -> value("");
     ((Fl_Input*)blueColorValue) -> value("");
 }
 
+// Applies the custom RGB values or falls back to the closest color present
 void ColorSelector::onConfirmColor(bobcat::Widget*) {
     lastConfirmedR = clampInt(redColorValue  -> value(), 0, 255);
     lastConfirmedG = clampInt(greenColorValue-> value(), 0, 255);
@@ -282,6 +291,7 @@ void ColorSelector::onConfirmColor(bobcat::Widget*) {
     redraw();
 }
 
+// Refreshes the text inputs so that they match the current selected color
 void ColorSelector::updateRGBInputs() {
     Color c = getColor();
 
@@ -294,8 +304,9 @@ void ColorSelector::updateRGBInputs() {
     ((Fl_Input*)blueColorValue) -> value(std::to_string(blueVal).c_str());
 }
 
+// Initializes the buttons, sliders, and states of the default colors
 ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
-
+    // Creates a button for the colors that are present on Canvas
     redButton = new Button(x + 10, y + 50, 50, 50, "");
     orangeButton = new Button(x + 70, y + 50, 50, 50, "");
     yellowButton = new Button(x + 130, y + 50, 50, 50, "");
@@ -309,47 +320,65 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     darkGreyButton = new Button(x + 130, y + 170, 50, 50, "");
     blackButton = new Button(x + 190, y + 170, 50, 50, "");
 
+    // Sets up the RGB values for the input fields and labels
+    redColorValue = new IntInput(300, 520, 100, 30, "");
+    greenColorValue = new IntInput(300, 580, 100, 30, "");
+    blueColorValue = new IntInput(300, 640, 100, 30, "");
+
+    // Controls the Clear and Confirm buttons
+    clearButton = new Button(510, 520, 175, 60, "Clear");
+    clearButton -> labelsize(36);
+    clearButton -> labelfont(FL_HELVETICA);
+    clearButton -> color(fl_rgb_color(245, 233, 211));
+    clearButton -> labelcolor(fl_rgb_color(30, 41, 45));
+    confirmButton = new Button(510, 610, 175, 60, "Confirm");
+    confirmButton -> labelsize(36);
+    confirmButton -> labelfont(FL_HELVETICA);
+    confirmButton -> color(fl_rgb_color(245, 233, 211));
+    confirmButton -> labelcolor(fl_rgb_color(30, 41, 45));
+
+    // Initializes the default selection of color to RED
+    color = RED;
+    usingCustomColor = false;
+    lastConfirmedR = 255;
+    lastConfirmedG = 0;
+    lastConfirmedB = 0;
+    onClick(redButton); 
+
+    // Creates and styles the section of labels and inputs
     colorsText = new TextBox(10, 470, 700, 25, "Colors");
     colorsText -> labelsize(18);
     colorsText -> labelcolor(fl_rgb_color(30, 41, 45));
     colorsText -> labelfont(FL_HELVETICA_BOLD);
-
     redColorText = new TextBox(300, 495, 450, 30, "R");
     redColorText -> labelsize(18);
     redColorText -> labelcolor(fl_rgb_color(30, 41, 45));
     redColorText -> labelfont(FL_HELVETICA_BOLD);
-
-    redColorValue = new IntInput(300, 520, 100, 30, "");
     redColorValue -> labelsize(18);
     redColorValue -> color(fl_rgb_color(245, 233, 211));
-
     greenColorText = new TextBox(300, 555, 450, 30, "G");
     greenColorText -> labelsize(18);
     greenColorText -> labelcolor(fl_rgb_color(30, 41, 45));
     greenColorText -> labelfont(FL_HELVETICA_BOLD);
-    greenColorValue = new IntInput(300, 580, 100, 30, "");
     greenColorValue -> color(fl_rgb_color(245, 233, 211));
     greenColorValue -> labelsize(18);
-
     blueColorText = new TextBox(300, 615, 450, 30, "B");
     blueColorText -> labelsize(18);
     blueColorText -> labelcolor(fl_rgb_color(30, 41, 45));
     blueColorText -> labelfont(FL_HELVETICA_BOLD);
-    blueColorValue = new IntInput(300, 640, 100, 30, "");
     blueColorValue -> labelsize(18);
     blueColorValue -> color(fl_rgb_color(245, 233, 211));
 
+    // Makes an increase and decrease button to adjust RGB values
     increaseRedButton = new Button(415, 520, 30, 30, "+");
     increaseRedButton -> labelfont(FL_HELVETICA);
     increaseRedButton -> labelcolor(fl_rgb_color(30, 41, 45));
     increaseRedButton -> color(fl_rgb_color(245, 233, 211));
     increaseRedButton -> labelsize(18);
-
     decreaseRedButton = new Button(455, 520, 30, 30, "-");
     decreaseRedButton -> labelfont(FL_HELVETICA);
     decreaseRedButton -> labelcolor(fl_rgb_color(30, 41, 45));
     decreaseRedButton -> color(fl_rgb_color(245, 233, 211));
-
     increaseGreenButton = new Button(415, 580, 30, 30, "+");
     increaseGreenButton -> labelfont(FL_HELVETICA);
     increaseGreenButton -> labelcolor(fl_rgb_color(30, 41, 45));
@@ -358,7 +387,6 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     decreaseGreenButton -> labelfont(FL_HELVETICA);
     decreaseGreenButton -> labelcolor(fl_rgb_color(30, 41, 45));
     decreaseGreenButton -> color(fl_rgb_color(245, 233, 211));
-
     increaseBlueButton = new Button(415, 640, 30, 30, "+");
     increaseBlueButton -> labelfont(FL_HELVETICA);
     increaseBlueButton -> labelcolor(fl_rgb_color(30, 41, 45));
@@ -368,18 +396,7 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     decreaseBlueButton -> labelcolor(fl_rgb_color(30, 41, 45));
     decreaseBlueButton -> color(fl_rgb_color(245, 233, 211));
 
-    clearButton = new Button(510, 520, 175, 60, "Clear");
-    clearButton -> labelsize(36);
-    clearButton -> labelfont(FL_HELVETICA);
-    clearButton -> color(fl_rgb_color(245, 233, 211));
-    clearButton -> labelcolor(fl_rgb_color(30, 41, 45));
-
-    confirmButton = new Button(510, 610, 175, 60, "Confirm");
-    confirmButton -> labelsize(36);
-    confirmButton -> labelfont(FL_HELVETICA);
-    confirmButton -> color(fl_rgb_color(245, 233, 211));
-    confirmButton -> labelcolor(fl_rgb_color(30, 41, 45));
-
+    // Adds color and border for the default 12 colors' buttons
     redButton->color(fl_rgb_color(255, 0, 0));
     redButton->labelcolor(FL_WHITE);
     orangeButton->color(fl_rgb_color(255, 127, 0));
@@ -405,19 +422,16 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     blackButton->color(fl_rgb_color(0, 0, 0));
     blackButton->labelcolor(FL_WHITE);
 
+    // Initializes the RGB text inputs to default values
     ((Fl_Input*)redColorValue) -> value("255");
     ((Fl_Input*)greenColorValue) -> value("0");
     ((Fl_Input*)blueColorValue) -> value("0");
 
-    color = RED;
-    usingCustomColor = false;
-    lastConfirmedR = 255;
-    lastConfirmedG = 0;
-    lastConfirmedB = 0;
-    onClick(redButton); 
+    // Styles this Group container
     box(FL_FLAT_BOX);
     Group::color(fl_rgb_color(134, 158, 164));
 
+    // Callbacks the register event
     ON_CLICK(redButton, ColorSelector::onClick);
     ON_CLICK(orangeButton, ColorSelector::onClick);
     ON_CLICK(yellowButton, ColorSelector::onClick);
@@ -439,5 +453,6 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     ON_CLICK(clearButton, ColorSelector::onClearInputs);
     ON_CLICK(confirmButton, ColorSelector::onConfirmColor);   
 
+    // Highlights the current functions selected as default
     visualizeSelectedColor();
 }
