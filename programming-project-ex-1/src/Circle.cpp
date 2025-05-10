@@ -2,14 +2,27 @@
 #include <GL/freeglut.h>
 #include <cmath>
 
-Circle::Circle() : x(0.0), y(0.0), radius(0.1), r(0.0), g(0.0), b(0.0) {
-    //
+// Default constructor that is centered at origin, contains default radius and the color black
+Circle::Circle() {
+    x = 0.0;
+    y = 0.0;
+    radius = 0.1;
+    r = 0.0;
+    g = 0.0;
+    b = 0.0;
 }
 
-Circle::Circle(float xx, float yy, float rr, float gg, float bb) : x(xx), y(yy), radius(0.1), r(rr), g(gg), b(bb) {
-    //
+// Parameterized constructor that places a circle at the (mx, my) position with the given color
+Circle::Circle(float mx, float my, float red, float green, float blue) : Circle() {
+    x = mx;
+    y = my;
+    radius = 0.1;
+    r = red;
+    g = green;
+    b = blue;
 }
 
+// Draws the circle as an approximated 60-sided polygon
 void Circle::draw() {
     glColor3f(r, g, b);
     glBegin(GL_POLYGON);
@@ -24,6 +37,7 @@ void Circle::draw() {
     glEnd();
 }
 
+// Hit-test which checks if the point (mx, my) lies within the circle
 bool Circle::contains(float mx, float my) {
     float dx = mx - x;
     float dy = my - y;
@@ -36,11 +50,13 @@ bool Circle::contains(float mx, float my) {
     }
 }
 
+// Moves the circle by the change in (dx, dy)
 void Circle::moveBy(float dx, float dy) {
     x = x + dx;
     y = y + dy;
 }
 
+// Resizes the circle by a scaling factor with a limit of the minimum radius
 void Circle::resize(float factor) {
     radius = radius * factor;
 
@@ -49,6 +65,7 @@ void Circle::resize(float factor) {
     }
 }
 
+// Changes the circle's fill in color
 void Circle::setColor(float nr, float ng, float nb) {
     r = nr;
     g = ng;
