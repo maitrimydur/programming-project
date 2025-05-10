@@ -6,7 +6,9 @@
 #include "Color.h"
 #include "Enums.h"
 
+// Includes a widget group that has 12 set-in colors, RGB numeric input values with +/- adjustments, and a clear and confirm controller
 class ColorSelector : public bobcat::Group {
+    // Presents the buttons to switch the set-in colors
     bobcat::Button* redButton;
     bobcat::Button* orangeButton;
     bobcat::Button* yellowButton;
@@ -20,6 +22,7 @@ class ColorSelector : public bobcat::Group {
     bobcat::Button* darkGreyButton;
     bobcat::Button* blackButton;
 
+    // Adjust the RGB values with control buttons
     bobcat::Button* increaseRedButton;
     bobcat::Button* decreaseRedButton;
     bobcat::Button* increaseGreenButton;
@@ -29,6 +32,7 @@ class ColorSelector : public bobcat::Group {
     bobcat::Button* clearButton;
     bobcat::Button* confirmButton;
 
+    // Labels and inputs the RGB values
     bobcat::TextBox* colorsText;
     bobcat::TextBox* redColorText;
     bobcat::IntInput* redColorValue;
@@ -37,13 +41,14 @@ class ColorSelector : public bobcat::Group {
     bobcat::TextBox* blueColorText;
     bobcat::IntInput* blueColorValue;
 
+    // Current color state
     COLOR color;
-
     bool usingCustomColor;
     int lastConfirmedR;
     int lastConfirmedG;
     int lastConfirmedB;
 
+    // Helpers and event handlers internally
     void deselectAllColors();
     void visualizeSelectedColor();
     void onClick(bobcat::Widget* sender);
